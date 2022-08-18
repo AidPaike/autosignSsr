@@ -1,26 +1,17 @@
-name: 'Auto check in sockboom'
-
-on: 
- # schedule:
- #   - cron: '30 1,8,12,18,22 * * *' # UTC+8小时=北京时间 17代表凌晨一点
-  watch:
-    types: [started]
-
+name: GitHub Actions Demo
+on: [push]
 jobs:
-  checking:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-    - name: Setup timezone
-      uses: zcong1993/setup-timezone@master
-      with:
-        timezone: Asia/Shanghai          
-
-    - name: Chickin Api #签到
-      run: | 
-        python sockboom.py
-        tail run.log #避免日志上传失败丢失日志
-    - name: Push log #更新日志
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: auto-checkin
-        branch: master
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
