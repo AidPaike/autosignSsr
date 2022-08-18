@@ -17,4 +17,9 @@ jobs:
       - name: checkin
         run: |
           python sockboom.py
+      - name: Push log #更新日志
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: auto-checkin
+          branch: test
       - run: echo "🍏 This job's status is ${{ job.status }}."
