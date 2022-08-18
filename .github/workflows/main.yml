@@ -4,11 +4,11 @@ jobs:
   Checkin:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@test
+      - uses: actions/checkout@V3
       - name: Setup Python
-        uses: actions/setup-python@v4.2.0
+        uses: actions/setup-python@v4
         with:
-         python-version: 3.9
+         python-version: '3.9'
 
       - name: requirements
         run : |
