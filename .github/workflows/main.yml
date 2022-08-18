@@ -2,7 +2,7 @@ name: 'Auto check in sockboom'
 
 on: 
   schedule:
-    - cron: '15 1,8,12,18,22 * * *' # UTC+8小时=北京时间 17代表凌晨一点
+    - cron: '30 1,8,12,18,22 * * *' # UTC+8小时=北京时间 17代表凌晨一点
   watch:
     types: [started]
 
