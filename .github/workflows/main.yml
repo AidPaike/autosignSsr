@@ -1,8 +1,8 @@
 name: GitHub Actions Demo
-# on: [push]
-on: 
+#on: [push]
+on:
   schedule:
-    - cron: '26 1,9,14,19,23,19 * * *' # UTC+8小时=北京时间 17代表凌晨一点
+    - cron: '5 * * * *' # UTC+8小时=北京时间 17代表凌晨一点
   watch:
     types: [ started ]
 jobs:
@@ -33,4 +33,5 @@ jobs:
         with:
           commit_message: auto-checkin
           branch: test
+          push_options: --force
       - run: echo "🍏 This job's status is ${{ job.status }}.yess"

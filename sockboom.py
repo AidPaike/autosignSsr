@@ -68,23 +68,23 @@ def user_centre(cookie):  # 用户中心
     output('  [+]使用流量:' + flow[1])
     output('  [+]剩余流量:' + flow[2])
     output('  [+]可用天数:' + flow[3])
-    return headers
+    return headers,flow
 
 
-def checkin(headers):
+def checkin(headers,flow):
     url = 'https://sockboom.app/user/checkin'
     response = requests.post(url=url, headers=headers, verify=False)
     msg = json.loads(response.content)['msg']
     output('  [+]签到信息:' + msg)
     now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     with open("run.log", "a") as f:
-        f.write(f"sockboom---->{now_time},{msg}\n")
+        f.write(f"sockboom---->{now_time},{msg},使用流量:{flow[1]},剩余流量:{flow[2]},可用天数:{flow[3]}\n")
 
 
 def main():
     cookie = sign(header)
-    headers = user_centre(cookie)
-    checkin(headers)
+    headers,flow = user_centre(cookie)
+    checkin(headers,flow)
 
 
 def main_handler(event, context):
