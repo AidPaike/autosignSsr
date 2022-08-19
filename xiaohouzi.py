@@ -13,38 +13,14 @@ header = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 }
 email = 'f335125303@163.com'
-passwd = 'Ff1314521...'
+passwd = 'fanzhenye@666'
 loginData = {"email": email, "passwd": passwd}  # 需要填写sockboom登录信息
 contents = ''
-
 
 def output(content):
     global contents
     contents += '\n' + content
     print(content)
-
-
-def sign(header):
-    url = 'https://sockboom.app/auth/login'
-    print(url)
-    response = requests.post(url=url, data=loginData)
-    print(response.content)
-
-    sign_message = json.loads(response.content)['msg']
-    user = json.loads(response.content)['user']
-    output('  [+]' + sign_message + '，用户：' + user)
-    cookie = response.headers
-    cookie_uid = cookie['Set-Cookie'].split('/')[0].split(';')[0]
-    cookie_email = 'f335125303@163.com'
-    cookie_key = cookie['Set-Cookie'].split('/')[2].split(';')[0].split(',')[1]
-    cookie_ip = cookie['Set-Cookie'].split('/')[3].split(';')[0].split(',')[1]
-    cookie_expire_in = cookie['Set-Cookie'].split('/')[4].split(';')[
-        0].split(',')[1]
-    Cookie = cookie_uid + ';' + cookie_email + ';' + \
-             cookie_key + ';' + cookie_ip + ';' + cookie_expire_in
-    print(Cookie)
-    return Cookie
-
 
 def user_centre(cookie):  # 用户中心
     url = 'https://sockboom.app/user'
@@ -71,25 +47,25 @@ def user_centre(cookie):  # 用户中心
     return headers
 
 
-def checkin(headers):
-    url = 'https://sockboom.app/user/checkin'
-    response = requests.post(url=url, headers=headers, verify=False)
-    msg = json.loads(response.content)['msg']
-    output('  [+]签到信息:' + msg)
-    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    with open("run.log", "a") as f:
-        f.write(f"sockboom---->{now_time},{msg}\n")
+def sign(header):
+    url = 'https://www.xiaohouzilaaa.xyz/auth/login'
+    print(url)
+    response = requests.post(url=url, data=loginData)
+    print(response.text)
 
-
-def main():
-    cookie = sign(header)
-    headers = user_centre(cookie)
-    checkin(headers)
-
-
-def main_handler(event, context):
-    return main()
-
+    sign_message = json.loads(response.content)
+    print(sign_message)
+    cookie = response.headers
+    cookie_uid = cookie['Set-Cookie'].split('/')[0].split(';')[0]
+    cookie_email = 'f335125303@163.com'
+    cookie_key = cookie['Set-Cookie'].split('/')[2].split(';')[0].split(',')[1]
+    cookie_ip = cookie['Set-Cookie'].split('/')[3].split(';')[0].split(',')[1]
+    cookie_expire_in = cookie['Set-Cookie'].split('/')[4].split(';')[
+        0].split(',')[1]
+    Cookie = '''crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df%2F8f9b0e06-0e3b-3a6e-bfc9-a82342206d3a=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;''' \
+             + cookie_uid + ';' + 'email=' + cookie_email + ';' + \
+             cookie_key + ';' + cookie_ip + ';' + cookie_expire_in
+    return Cookie
 
 if __name__ == '__main__':
-    main()
+    cookie = sign(header)
