@@ -33,4 +33,5 @@ jobs:
         with:
           commit_message: auto-checkin
           branch: test
+          push_options: --force
       - run: echo "🍏 This job's status is ${{ job.status }}.yess"
