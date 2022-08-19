@@ -2,8 +2,8 @@ name: GitHub Actions Demo
 #on: [push]
 on:
   push:
-  schedule:
-    - cron: '5 * * * *' # UTC+8小时=北京时间 17代表凌晨一点
+  #schedule:
+  #  - cron: '5 * * * *' # UTC+8小时=北京时间 17代表凌晨一点
 jobs:
   Checkin:
     runs-on: ubuntu-latest
