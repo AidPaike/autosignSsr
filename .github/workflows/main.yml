@@ -32,4 +32,4 @@ jobs:
         with:
           commit_message: auto-checkin
           branch: test
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This job's status is ${{ job.status }}.yess"
