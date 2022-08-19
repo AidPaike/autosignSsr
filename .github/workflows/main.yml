@@ -31,6 +31,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: auto-checkin
-          branch: origin/master
+          branch: master
           push_options: --force
+          skip_checkout: true
+          commit_options: '--no-verify --signoff'
+          create_branch: true
       - run: echo "🍏 This job's status is ${{ job.status }}.yess"
