@@ -1,9 +1,9 @@
 name: GitHub Actions Demo
-on:
+on: [push]
  # schedule:
  #   - cron: '2 1,9,14,19,23 * * *' # UTC+8小时=北京时间 17代表凌晨一点
-  watch:
-    types: [ started ]
+ # watch:
+ #   types: [ started ]
 jobs:
   Checkin:
     runs-on: ubuntu-latest
