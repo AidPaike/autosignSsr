@@ -17,10 +17,12 @@ passwd = 'fanzhenye@666'
 loginData = {"email": email, "passwd": passwd}  # 需要填写sockboom登录信息
 contents = ''
 
+
 def output(content):
     global contents
     contents += '\n' + content
     print(content)
+
 
 def user_centre(cookie):  # 用户中心
     url = 'https://sockboom.app/user'
@@ -62,10 +64,43 @@ def sign(header):
     cookie_ip = cookie['Set-Cookie'].split('/')[3].split(';')[0].split(',')[1]
     cookie_expire_in = cookie['Set-Cookie'].split('/')[4].split(';')[
         0].split(',')[1]
-    Cookie = '''crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df%2F8f9b0e06-0e3b-3a6e-bfc9-a82342206d3a=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;''' \
-             + cookie_uid + ';' + 'email=' + cookie_email + ';' + \
-             cookie_key + ';' + cookie_ip + ';' + cookie_expire_in
+    Cookie = "mtauth=c8be0c708ca4c9486a433bbd0ce255ef; pop=yes; lang=zh-cn;" + cookie_uid + ';' + 'email=' + cookie_email + ';' + \
+             cookie_key + ';' + cookie_ip + ';' + cookie_expire_in + ";PHPSESSID=7eh43v0f5jcrbuej8jvgvbld67"
     return Cookie
+
+
+def user_centre(cookie):  # 用户中心
+    url = 'https://www.xiaohouzilaaa.xyz/user'
+    headers = {
+        'Cookie': "mtauth=c8be0c708ca4c9486a433bbd0ce255ef; pop=yes; lang=zh-cn; uid=64876; email=f335125303%40163.com; key=08512ae15326289e79e8660d7a60dfe6838d619b9c586; ip=0b80a9dc2efd883bb99f0ceb001accbe; expire_in=1661480824; PHPSESSID=7eh43v0f5jcrbuej8jvgvbld67"
+    }
+    response = requests.get(url=url, headers=headers, verify=False)
+    soup = BeautifulSoup(response.content, 'html.parser')  # 解析html页面
+    # print(response.text)
+    # 获取个人用户信息
+    pims = soup.select('.font-size-h4')
+    pim = [pim.text for pim in pims]
+    output('  [+]剩余会员时长:' + pim[0].split('\n')[1])
+    output('  [+]剩余流量:' + pim[1].split('\n')[1])
+    output('  [+]设备在线:' + pim[2].split('\n')[1])
+    return headers, pim
+
+
+def checkin(headers, pim):
+    url = 'https://www.xiaohouzilaaa.xyz/user/checkin'
+    response = requests.post(url=url, headers=headers, verify=False)
+    msg = json.loads(response.content)['msg']
+    output('  [+]签到信息:' + msg)
+    now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    p1 = pim[0].split('\n')[1]
+    p2 = pim[1].split('\n')[1]
+    p3 = pim[2].split('\n')[1]
+    with open("run.log", "a") as f:
+        f.write(f"xiaohouzi---->{now_time},{msg},剩余会员时长:{p1},剩余流量:{p2},设备在线:{p3}\n")
+
 
 if __name__ == '__main__':
     cookie = sign(header)
+    # print(cookie)
+    headers, pim = user_centre(cookie)
+    checkin(headers, pim)
