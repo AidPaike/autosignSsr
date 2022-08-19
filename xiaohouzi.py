@@ -55,8 +55,6 @@ def sign(header):
 
     sign_message = json.loads(response.content)
     print(sign_message)
-    user = json.loads(response.content)['user']
-    output('  [+]' + sign_message + '，用户：' + user)
     cookie = response.headers
     cookie_uid = cookie['Set-Cookie'].split('/')[0].split(';')[0]
     cookie_email = 'f335125303@163.com'
@@ -64,9 +62,9 @@ def sign(header):
     cookie_ip = cookie['Set-Cookie'].split('/')[3].split(';')[0].split(',')[1]
     cookie_expire_in = cookie['Set-Cookie'].split('/')[4].split(';')[
         0].split(',')[1]
-    Cookie = cookie_uid + ';' + cookie_email + ';' + \
+    Cookie = '''crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df%2F8f9b0e06-0e3b-3a6e-bfc9-a82342206d3a=session_18165a6b-e009-43dd-b300-a15fcd6c7b10;''' \
+             + cookie_uid + ';' + 'email=' + cookie_email + ';' + \
              cookie_key + ';' + cookie_ip + ';' + cookie_expire_in
-    print(Cookie)
     return Cookie
 
 if __name__ == '__main__':
