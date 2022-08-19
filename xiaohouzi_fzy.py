@@ -24,31 +24,6 @@ def output(content):
     print(content)
 
 
-def user_centre(cookie):  # 用户中心
-    url = 'https://sockboom.app/user'
-    headers = {
-        'Cookie': cookie
-    }
-    response = requests.get(url=url, headers=headers, verify=False)
-    soup = BeautifulSoup(response.content, 'html.parser')  # 解析html页面
-    # 获取个人用户信息
-    pims = soup.select('.dash-card-content h3')
-    pim = [pim for pim in pims]
-    # print(pims)
-    output('  [+]用户等级:' + pim[0].string)
-    output('  [+]账户余额:' + pim[1].text.split('\n')[0])
-    output('  [+]在线设备:' + pim[2].text.split('\n')[0])
-    output('  [+]宽带速度:' + pim[3].string)
-    # 获取流量信息
-    flows = soup.select('span[class="pull-right strong"]')
-    flow = [flow.string for flow in flows]
-    output('  [+]总流量:' + flow[0])
-    output('  [+]使用流量:' + flow[1])
-    output('  [+]剩余流量:' + flow[2])
-    output('  [+]可用天数:' + flow[3])
-    return headers
-
-
 def sign(header):
     url = 'https://www.xiaohouzilaaa.xyz/auth/login'
     print(url)
