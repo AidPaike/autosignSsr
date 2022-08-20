@@ -6,9 +6,9 @@ name: sockboom_monkey
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "dev" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "master" ]
   schedule:
     - cron: '13 9,12,19,23 * * *'
 
