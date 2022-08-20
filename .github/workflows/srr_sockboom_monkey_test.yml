@@ -2,9 +2,7 @@ name: srr_sockboom_monkey_test
 on:
   schedule:
     - cron: '*/6 * * * *'
-  push:
-    branches:
-      - dev
+
   workflow_dispatch:
 jobs:
   Checkin:
