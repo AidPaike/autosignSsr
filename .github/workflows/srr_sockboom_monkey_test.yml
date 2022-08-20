@@ -5,19 +5,23 @@ on:
   push:
     branches:
       - dev
+  workflow_dispatch:
 jobs:
   Checkin:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v4
+      
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          
       - name: requirements
         run: |
           python -m pip install --upgrade pip
           pip3 install -r requirements.txt
+          
       - name: checkin
         run: |
           python sockboom.py
