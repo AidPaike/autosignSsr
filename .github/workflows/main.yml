@@ -3,9 +3,6 @@ name: srr_sockboom_monkey
 on:
   schedule:
     - cron: '*/6 * * * *'
-  push:
-    branches:
-      - dev
   
 jobs:
   Checkin:
