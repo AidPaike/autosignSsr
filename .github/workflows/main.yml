@@ -1,8 +1,12 @@
 name: srr_sockboom_monkey
+
 on:
-  push:
   schedule:
     - cron: '*/6 * * * *'
+  push:
+    branches:
+      - dev
+  
 jobs:
   Checkin:
     runs-on: ubuntu-latest
