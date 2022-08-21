@@ -46,7 +46,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: auto-checkin
-          branch: dev
+          branch: origin/dev
           push_options: --force
           skip_checkout: true
           commit_options: '--no-verify --signoff'
