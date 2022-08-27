@@ -47,7 +47,7 @@ def sign(header):
 def user_centre(cookie):  # 用户中心
     url = 'https://www.xiaohouzilaaa.xyz/user'
     headers = {
-        'Cookie': "mtauth=c8be0c708ca4c9486a433bbd0ce255ef; pop=yes; lang=zh-cn; uid=64876; email=f335125303%40163.com; key=08512ae15326289e79e8660d7a60dfe6838d619b9c586; ip=0b80a9dc2efd883bb99f0ceb001accbe; expire_in=1661480824; PHPSESSID=7eh43v0f5jcrbuej8jvgvbld67"
+        'Cookie': cookie
     }
     response = requests.get(url=url, headers=headers, verify=False)
     soup = BeautifulSoup(response.content, 'html.parser')  # 解析html页面
