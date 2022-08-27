@@ -29,7 +29,6 @@ def sign(header):
     url = 'https://ssrla.de/auth/login'
     response = requests.post(url=url, data=loginData)
     # print(response.content)
-    # print(response.text)
     sign_message = json.loads(response.content)
     # print(sign_message)
     cookie = response.headers
@@ -47,7 +46,7 @@ def sign(header):
 def user_centre(cookie):  # 用户中心
     url = 'https://ssrla.de/user'
     headers = {
-        'Cookie': "crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df=session_18165a6b-e009-43dd-b300-a15fcd6c7b10; crisp-client%2Fsession%2F1ae3ebbe-7b15-4192-93fd-0a86bc7f22df%2F8f9b0e06-0e3b-3a6e-bfc9-a82342206d3a=session_18165a6b-e009-43dd-b300-a15fcd6c7b10; uid=6496; email=f335125303%40163.com; key=52e442647e3b6efff04d53bfe41aea544d941d6ae3836; ip=0069911ae1d99e8325bca46798fcd7d4; expire_in=1660956560"
+        'Cookie': cookie
     }
     response = requests.get(url=url, headers=headers, verify=False)
     soup = BeautifulSoup(response.content, 'html.parser')  # 解析html页面
